@@ -7,7 +7,9 @@ import {
   IsOptional, 
   IsPositive, 
   IsString, 
-  Length 
+  Length, 
+  Matches,
+  MinLength
 } from "class-validator";
 
 export enum TaskTag {
@@ -31,4 +33,10 @@ export class CreateTaskDto {
   @IsArray()  
   @IsEnum(TaskTag, { each: true })
   tags: TaskTag[];
+
+  @Matches(/^(?=.*[A-Z])(?=.*[0-9]).+$/)
+  @IsString()
+  @MinLength(6)
+  password: string;
+
 }
