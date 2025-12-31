@@ -64,4 +64,10 @@ export class TaskService {
 
     return task;
   }
+
+  deleteTask(id: number) {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+
+    return this.tasks;
+  }
 }
