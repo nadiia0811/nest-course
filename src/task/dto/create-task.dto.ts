@@ -12,6 +12,7 @@ import {
   MinLength,
   IsUrl
 } from "class-validator";
+import { StartsWith } from "../decorators/starts-with.decorator";
 
 export enum TaskTag {
   WORK = 'work',
@@ -23,6 +24,7 @@ export class CreateTaskDto {
   @IsString()
   @IsNotEmpty()
   @Length(2, 40)
+  @StartsWith('Task: ')
   title: string;
 
   @IsInt({ message: 'Priority must be a number'})
