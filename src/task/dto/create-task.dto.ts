@@ -9,7 +9,8 @@ import {
   IsString, 
   Length, 
   Matches,
-  MinLength
+  MinLength,
+  IsUrl
 } from "class-validator";
 
 export enum TaskTag {
@@ -39,4 +40,12 @@ export class CreateTaskDto {
   @MinLength(6)
   password: string;
 
+  @IsUrl({
+    protocols: ['http', 'https', 'wss'],
+    require_protocol: true,
+    require_port: false,
+    host_blacklist: ['htmllessons.io']
+  }, 
+  { message: 'Incorrect URL format' })
+  websiteUrl: string;
 }
