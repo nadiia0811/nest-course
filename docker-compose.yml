@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports: 
+      - 5432:5432
+    volumes: 
+      - postgres_data:/var/lib/postgresql/data 
+    networks:
+      - nest_postgres
+      
+volumes: 
+  postgres_data:
+networks:
+  nest_postgres:
