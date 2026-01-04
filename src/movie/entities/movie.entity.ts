@@ -26,6 +26,7 @@ export class MovieEntity {
   description: string;
 
   @Column({
+    name: 'release_year',
     type: 'int',
     unsigned: true
   })
@@ -40,9 +41,13 @@ export class MovieEntity {
   })
   rating: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({
+    name: 'created_at'
+  })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    name: 'updated_at'
+  })
   uptedAt: Date;
 }
