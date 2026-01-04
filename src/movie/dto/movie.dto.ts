@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, IsInt } from "class-validator";
 
-export class CreateMovieDto {
+export class MovieDto {
   @IsNotEmpty()
   @IsString()
   title: string;
