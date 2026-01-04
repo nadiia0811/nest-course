@@ -5,7 +5,8 @@ import {
   Post, 
   Param, 
   Req,
-  Patch
+  Patch,
+  Delete
  } from '@nestjs/common';
 import type { Request } from 'express';
 import { MovieService } from './movie.service';
@@ -22,7 +23,7 @@ export class MovieController {
 
   @Post('create')
   MovieDto(@Body() dto: MovieDto) {
-    return this.movieService.MovieDto(dto);
+    return this.movieService.createMovie(dto);
   }
 
   @Get(':id')
@@ -33,6 +34,11 @@ export class MovieController {
   @Patch(':id')
   updateMovieById(@Param('id') id: string, @Body() dto: Partial<MovieDto>) {
    return this.movieService.updateMovieById(+id, dto);
+  }
+
+  @Delete(':id')
+  deleteMovieById(@Param('id') id: string) {
+    return this.movieService.deleteMovieById(+id);
   }
 
   @Get('request')

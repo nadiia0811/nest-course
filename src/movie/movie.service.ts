@@ -20,7 +20,7 @@ export class MovieService {
     return movies;
   }
 
-  async MovieDto(dto: MovieDto): Promise<MovieEntity> {
+  async createMovie(dto: MovieDto): Promise<MovieEntity> {
     const movie = this.movieRepository.create(dto);
     try {
       await this.movieRepository.save(movie);
@@ -56,5 +56,12 @@ export class MovieService {
     
     Object.assign(movie, dto);
     return await this.movieRepository.save(movie);
+  }
+
+  async deleteMovieById(id: number) {
+    const movie = await this.getMovieById(id);
+
+    await this.movieRepository.remove(movie);
+    return movie.id;
   }
 }
