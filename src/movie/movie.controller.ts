@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Query, Req } from '@nestjs/common';
 import type { Request } from 'express';
 import { MovieService } from './movie.service';
+import { CreateMovieDto } from './dto/create-movie.dto';
 
 @Controller('movies')
 export class MovieController {
@@ -11,10 +12,9 @@ export class MovieController {
     return this.movieService.findAllMovies();
   }  
 
-  @Post()
-  createMovie(@Body() body: { title: string }) {
-    const { title } = body;
-    return `Film "${title}" created`;
+  @Post('create')
+  createMovie(@Body() dto: CreateMovieDto) {
+    return this.movieService.createMovie(dto);
   }
 
   @Get('request')
