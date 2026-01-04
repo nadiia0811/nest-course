@@ -12,7 +12,11 @@ export class MovieService {
   ) { }
 
   async findAllMovies(): Promise<MovieEntity[]> {
-    const movies = await this.movieRepository.find();
+    const movies = await this.movieRepository.find({
+      order: {
+        createdAt: 'desc'
+      }
+    });
     return movies;
   }
 
