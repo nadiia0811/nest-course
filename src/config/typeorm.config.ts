@@ -8,8 +8,9 @@ export function getTypeormConfig(configService: ConfigService): TypeOrmModuleOpt
     username: configService.get('POSTGRES_USER'),
     database: configService.get('POSTGRES_DB'),
     host: configService.get('POSTGRES_HOST'),
-    port: configService.get('POSTGRES_PORT'),
+    port: +configService.get('POSTGRES_PORT'),
     password: configService.get('POSTGRES_PASSWORD'),
+    autoLoadEntities: true,
     synchronize: true
   }
 }
