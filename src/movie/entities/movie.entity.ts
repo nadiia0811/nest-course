@@ -1,21 +1,44 @@
 import { 
     Entity, 
     PrimaryGeneratedColumn,
+    PrimaryColumn,
     Column,
     CreateDateColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
+    Generated
  } from "typeorm";
 
 @Entity({ name: 'movies' })
 export class MovieEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn()
+  @Generated('uuid')
+  id: string;
 
-  @Column()
+  @Column({
+    type: 'varchar'
+  })
   title: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    nullable: true
+  })
+  description: string;
+
+  @Column({
+    type: 'int',
+    unsigned: true
+  })
   releaseYear: number;
+
+  @Column({
+    type: 'decimal',
+    precision: 3,
+    nullable: true,
+    scale: 1,
+    default: 8.0
+  })
+  rating: number;
 
   @CreateDateColumn()
   createdAt: Date;

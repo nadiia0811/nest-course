@@ -33,7 +33,7 @@ export class MovieService {
     }
   }
 
-  async getMovieById(id: number): Promise<MovieEntity> {
+  async getMovieById(id: string): Promise<MovieEntity> {
     const movie = await this.movieRepository.findOne({
       where: {
         id
@@ -47,7 +47,7 @@ export class MovieService {
     return movie;
   }
 
-  async updateMovieById(id: number, dto: Partial<MovieDto>) {
+  async updateMovieById(id: string, dto: Partial<MovieDto>) {
     const movie = await this.getMovieById(id); 
 
     if (!movie) {
@@ -58,7 +58,7 @@ export class MovieService {
     return await this.movieRepository.save(movie);
   }
 
-  async deleteMovieById(id: number) {
+  async deleteMovieById(id: string) {
     const movie = await this.getMovieById(id);
 
     await this.movieRepository.remove(movie);

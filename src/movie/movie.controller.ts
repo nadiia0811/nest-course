@@ -28,17 +28,17 @@ export class MovieController {
 
   @Get(':id')
   getMovieById(@Param('id') id: string) {
-    return this.movieService.getMovieById(+id);
+    return this.movieService.getMovieById(id);
   }
 
   @Patch(':id')
   updateMovieById(@Param('id') id: string, @Body() dto: Partial<MovieDto>) {
-   return this.movieService.updateMovieById(+id, dto);
+   return this.movieService.updateMovieById(id, dto);
   }
 
   @Delete(':id')
   deleteMovieById(@Param('id') id: string) {
-    return this.movieService.deleteMovieById(+id);
+    return this.movieService.deleteMovieById(id);
   }
 
   @Get('request')
