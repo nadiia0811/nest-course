@@ -7,7 +7,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { getTypeormConfig } from './config/typeorm.config';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
