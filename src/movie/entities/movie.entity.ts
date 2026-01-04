@@ -6,7 +6,14 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     Generated
- } from "typeorm";
+} from "typeorm";
+
+export enum Genre {
+  ACTION = 'action',
+  FANTASY = 'fantasy',
+  HORROR = 'horror',
+  DRAMA = 'drama'
+}
 
 @Entity({ name: 'movies' })
 export class MovieEntity {
@@ -31,6 +38,13 @@ export class MovieEntity {
     unsigned: true
   })
   releaseYear: number;
+
+  @Column({
+    type: 'enum',
+    enum: Genre,
+    default: Genre.DRAMA
+  })
+  genre: Genre;
 
   @Column({
     type: 'decimal',
