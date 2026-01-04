@@ -7,8 +7,8 @@ export class MovieController {
   constructor(private readonly movieService: MovieService) { }
 
   @Get()
-  findAll(@Query() query: any) {
-    return JSON.stringify(query);
+  findAllMovies() {
+    return this.movieService.findAllMovies();
   }  
 
   @Post()
