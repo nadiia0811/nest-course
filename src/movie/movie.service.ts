@@ -1,8 +1,8 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MovieEntity } from './entities/movie.entity';
 import { Repository } from 'typeorm';
-import { CreateMovieDto } from './dto/create-movie.dto';
+import { MovieDto } from './dto/movie.dto';
 
 @Injectable()
 export class MovieService {
@@ -20,7 +20,7 @@ export class MovieService {
     return movies;
   }
 
-  async createMovie(dto: CreateMovieDto): Promise<MovieEntity> {
+  async MovieDto(dto: MovieDto): Promise<MovieEntity> {
     const movie = this.movieRepository.create(dto);
     try {
       await this.movieRepository.save(movie);
@@ -31,5 +31,30 @@ export class MovieService {
         HttpStatus.INTERNAL_SERVER_ERROR, 
       );
     }
+  }
+
+  async getMovieById(id: number): Promise<MovieEntity> {
+    const movie = await this.movieRepository.findOne({
+      where: {
+        id
+      }
+    });
+
+    if (!movie) {
+      throw new NotFoundException(`Movie with id ${id} not found`);
+    }
+
+    return movie;
+  }
+
+  async updateMovieById(id: number, dto: Partial<MovieDto>) {
+    const movie = await this.getMovieById(id); 
+
+    if (!movie) {
+      throw new NotFoundException(`Movie with id ${id} not found`);
+    }
+    
+    Object.assign(movie, dto);
+    return await this.movieRepository.save(movie);
   }
 }

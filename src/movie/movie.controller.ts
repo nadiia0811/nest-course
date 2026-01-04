@@ -1,7 +1,15 @@
-import { Body, Controller, Get, Post, Query, Req } from '@nestjs/common';
+import { 
+  Body, 
+  Controller, 
+  Get, 
+  Post, 
+  Param, 
+  Req,
+  Patch
+ } from '@nestjs/common';
 import type { Request } from 'express';
 import { MovieService } from './movie.service';
-import { CreateMovieDto } from './dto/create-movie.dto';
+import { MovieDto } from './dto/movie.dto';
 
 @Controller('movies')
 export class MovieController {
@@ -13,8 +21,18 @@ export class MovieController {
   }  
 
   @Post('create')
-  createMovie(@Body() dto: CreateMovieDto) {
-    return this.movieService.createMovie(dto);
+  MovieDto(@Body() dto: MovieDto) {
+    return this.movieService.MovieDto(dto);
+  }
+
+  @Get(':id')
+  getMovieById(@Param('id') id: string) {
+    return this.movieService.getMovieById(+id);
+  }
+
+  @Patch(':id')
+  updateMovieById(@Param('id') id: string, @Body() dto: Partial<MovieDto>) {
+   return this.movieService.updateMovieById(+id, dto);
   }
 
   @Get('request')
