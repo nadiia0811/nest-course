@@ -6,7 +6,7 @@ import {
     Min
 } from "class-validator";
 
-export class ReviewDto {
+export class CreateReviewDto {
     @IsString()
     text: string;
 
