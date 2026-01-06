@@ -1,3 +1,4 @@
+import { ActorEntity } from "src/actor/entities/actor.entity";
 import { ReviewEntity } from "src/review/entities/review.entity";
 import { 
     Entity, 
@@ -5,7 +6,9 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
-    OneToMany
+    OneToMany,
+    ManyToMany,
+    JoinTable
 } from "typeorm";
 
 export enum Genre {
@@ -44,6 +47,20 @@ export class MovieEntity {
     default: Genre.DRAMA
   })
   genre: Genre;
+
+  @ManyToMany(() => ActorEntity, (actor) => actor.movies)
+  @JoinTable({ //промежуточная таблица для связи many - to - many
+    name: 'movie_actors',
+    joinColumn: {  //колонка для сущности movie в промежуточной таблице
+      name: 'movie_id',
+      referencedColumnName: 'id'
+    },
+    inverseJoinColumn: { //колонка для сущности actor в промежуточной таблице
+      name: 'actor_id',
+      referencedColumnName: 'id'
+    }
+  })
+  actors: ActorEntity[];
 
   @Column({
     type: 'decimal',
