@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsInt } from "class-validator";
+import { IsNotEmpty, IsString, IsInt, IsArray, IsUUID } from "class-validator";
 
 export class MovieDto {
   @IsNotEmpty()
@@ -8,4 +8,8 @@ export class MovieDto {
   @IsInt()
   @IsNotEmpty()
   releaseYear: number;
+
+  @IsArray()
+  @IsUUID('4', { each: true })
+  actorIds: string[];
 }

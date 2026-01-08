@@ -1,3 +1,4 @@
+import { IsArray } from "class-validator";
 import { ActorEntity } from "src/actor/entities/actor.entity";
 import { ReviewEntity } from "src/review/entities/review.entity";
 import { 
