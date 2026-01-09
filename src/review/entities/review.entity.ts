@@ -35,7 +35,7 @@ export class ReviewEntity {
   @ManyToOne(() => MovieEntity, (movie) => movie.reviews,
     { onDelete: 'CASCADE' }
   )
-  @JoinColumn({ name: 'movie_id' })
+  @JoinColumn({ name: 'movie_id' })  //JoinColumn всегда на стороне "many" (Foreign Key)
   movie: MovieEntity;
 
   @CreateDateColumn({ name: 'created_at' })

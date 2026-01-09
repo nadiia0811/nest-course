@@ -9,8 +9,11 @@ import {
     UpdateDateColumn,
     OneToMany,
     ManyToMany,
-    JoinTable
+    JoinTable,
+    OneToOne,
+    JoinColumn
 } from "typeorm";
+import { PosterEntity } from "./poster.entity";
 
 export enum Genre {
   ACTION = 'action',
@@ -73,7 +76,15 @@ export class MovieEntity {
   rating: number;
 
   @OneToMany(() => ReviewEntity, (review) => review.movie)
-  reviews: ReviewEntity[]
+  reviews: ReviewEntity[];
+
+  @OneToOne(() => PosterEntity, (poster) => poster.movie,
+    {
+      onDelete: 'CASCADE'
+    }
+  )
+  @JoinColumn({ name: 'poster_id' })
+  poster: PosterEntity;
 
   @CreateDateColumn({
     name: 'created_at'

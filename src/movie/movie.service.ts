@@ -51,7 +51,8 @@ export class MovieService {
     const movie = await this.movieRepository.findOne({
       where: {
         id
-      }
+      },
+      relations: ['actors']
     });
 
     if (!movie) {
