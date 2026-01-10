@@ -1,8 +1,29 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
+model Movie {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  releaseYear Int  @map("release_year")
+  rating      Float  @default(0.0)
+  genre       Genre  @default(DRAMA)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("movies")
+}
+
+enum Genre {
+ ACTION
+ COMEDY
+ DRAMA
+ THRILLER
+
+ @@map("enam_genres")
+}
